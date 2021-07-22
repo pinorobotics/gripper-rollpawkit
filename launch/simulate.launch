@@ -1,0 +1,16 @@
+<launch>
+
+    <arg name="model" default="$(find gripper-rollpawkit)/urdf/gripper-rollpawkit.urdf"/>
+    <arg name="rvizconfig" default="$(find gripper-rollpawkit)/rviz/visualize.rviz" />
+
+    <!-- used by rviz and robot_state_publisher -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+    <!-- robot_state_publisher -->
+    <node name="gripper_rollpawkit_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+
+</launch>

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <material name="blue">
+    <color rgba="0 0 1 1"/>
+  </material>
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+  <material name="green">
+    <color rgba="0 1 0 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <xacro:property name="scale" value="1.0 1.0 1.0"/>
+  
+  <xacro:macro name="base_link" params="prefix">
+    <link name="${prefix}base_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://gripper-rollpawkit/meshes/joint_connector.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <visual>
+        <origin xyz="0.0174 0 0" />
+        <geometry>
+          <mesh filename="package://gripper-rollpawkit/meshes/servo_plate.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://gripper-rollpawkit/meshes/joint_connector.stl"/>
+        </geometry>
+      </collision>
+            <collision>
+        <geometry>
+          <mesh filename="package://gripper-rollpawkit/meshes/servo_plate.stl"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="gear_links" params="prefix">
+    <link name="${prefix}gear_links">
+      <visual>
+        <geometry>
+          <mesh filename="package://gripper-rollpawkit/meshes/driving_gear.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <visual>
+        <origin xyz="0 0.0258 0" />
+        <geometry>
+          <mesh filename="package://gripper-rollpawkit/meshes/driven_gear.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://gripper-rollpawkit/meshes/driving_gear.stl"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="gear_joints" params="prefix">
+    <joint name="${prefix}gear_joints" type="revolute">
+      <origin xyz="0.0172 -0.0127 0.007" rpy="0 0 0"/>
+      <parent link="${prefix}base_link" />
+      <child link="${prefix}gear_links" />
+      <axis xyz="0 0 1" />
+      <limit lower="-0.81" upper="0" velocity="2.0" effort="1000" />
+    </joint>
+  </xacro:macro>
+
+  <!-- Initialization of all joints and links -->
+  <xacro:macro name="gripper-rollpawkit" params="prefix">
+    <xacro:base_link prefix="${prefix}"/>
+    <xacro:gear_links prefix="${prefix}"/>
+    <xacro:gear_joints prefix="${prefix}"/>
+  </xacro:macro>
+
+</robot>
