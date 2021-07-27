@@ -105,17 +105,19 @@
     </joint>
   </xacro:macro>
 
-  <!-- Gear linkage -->
+  <!-- Finger linkage -->
   
-  <xacro:macro name="finger_link" params="namex mesh">
+  <xacro:macro name="finger_link" params="namex rpyx mesh">
     <link name="${namex}">
       <visual>
+        <origin rpy="${rpyx}"/>
         <geometry>
           <mesh filename="${mesh}"/>
         </geometry>
         <material name="white"/>
       </visual>
       <collision>
+        <origin rpy="${rpyx}"/>
         <geometry>
           <mesh filename="${mesh}"/>
         </geometry>
@@ -123,14 +125,14 @@
     </link>
   </xacro:macro>
 
-  <xacro:macro name="finger_joint" params="namex parentx childx origin mimicx">
+  <xacro:macro name="finger_joint" params="namex parentx childx origin lo:=0 hi:=0 offset mimicx">
     <joint name="${namex}" type="revolute">
       <origin xyz="${origin}" rpy="0 0 0"/>
       <parent link="${parentx}" />
       <child link="${childx}" />
       <axis xyz="0 0 1" />
-      <limit lower="0.81" upper="0" velocity="2.0" effort="1000" />
-      <mimic joint="${mimicx}" multiplier="-1" offset="0.42" />
+      <limit lower="${lo}" upper="${hi}" velocity="2.0" effort="1000" />
+      <mimic joint="${mimicx}" multiplier="-1" offset="${offset}" />
     </joint>
   </xacro:macro>
   
@@ -161,12 +163,15 @@
 
     <xacro:finger_link
         namex="driving_finger_link"
+        rpyx="0 0 0"
         mesh="package://gripper-rollpawkit/meshes/linkage.stl"/>    
     <xacro:finger_joint
         namex="driving_finger_joint"
         parentx="driving_gear_link"
         childx="driving_finger_link"
         origin="0.0308 0 0"
+        lo="0.81"
+        offset="0.42"
         mimicx="driving_gear_joint"/>
     
     <!-- -->
@@ -190,6 +195,19 @@
         parentx="base_link"
         childx="driven_linkage_link"
         origin="0.0356 0.0054 0.007"
+        mimicx="driven_gear_joint"/>
+
+    <xacro:finger_link
+        namex="driven_finger_link"
+        rpyx="3.14 0 0"
+        mesh="package://gripper-rollpawkit/meshes/linkage.stl"/>    
+    <xacro:finger_joint
+        namex="driven_finger_joint"
+        parentx="driven_gear_link"
+        childx="driven_finger_link"
+        origin="0.0308 0 0"
+        hi="0.81"
+        offset="-0.42"
         mimicx="driven_gear_joint"/>
 
   </xacro:macro>
