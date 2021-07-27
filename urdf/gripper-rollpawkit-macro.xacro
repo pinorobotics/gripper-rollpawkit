@@ -100,46 +100,54 @@
       <parent link="${parentx}" />
       <child link="${childx}" />
       <axis xyz="0 0 1" />
-      <limit lower="-0.81" upper="0" velocity="2.0" effort="1000" />
-      <mimic joint="${mimicx}" multiplier="-1" offset="0" />
+      <limit lower="0" upper="0.81" velocity="2.0" effort="1000" />
+      <mimic joint="${mimicx}" multiplier="1" offset="0" />
     </joint>
   </xacro:macro>
 
+  <!-- Gear linkage -->
+  
+  <xacro:macro name="finger_link" params="namex mesh">
+    <link name="${namex}">
+      <visual>
+        <geometry>
+          <mesh filename="${mesh}"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="${mesh}"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="finger_joint" params="namex parentx childx origin mimicx">
+    <joint name="${namex}" type="revolute">
+      <origin xyz="${origin}" rpy="0 0 0"/>
+      <parent link="${parentx}" />
+      <child link="${childx}" />
+      <axis xyz="0 0 1" />
+      <limit lower="0.81" upper="0" velocity="2.0" effort="1000" />
+      <mimic joint="${mimicx}" multiplier="-1" offset="0.42" />
+    </joint>
+  </xacro:macro>
+  
   <!-- Initialization of all joints and links -->
   
   <xacro:macro name="gripper-rollpawkit" params="prefix">
-    <xacro:base_link namex="${prefix}base_link"/>
+    <xacro:base_link namex="base_link"/>
 
     <xacro:gear_link
-        namex="${prefix}driving_gear_link"
+        namex="driving_gear_link"
         mesh="package://gripper-rollpawkit/meshes/driving_gear.stl"/>
     <xacro:gear_joint
-        namex="${prefix}driving_gear_joint"
-        parentx="${prefix}base_link"
-        childx="${prefix}driving_gear_link"
+        namex="driving_gear_joint"
+        parentx="base_link"
+        childx="driving_gear_link"
         origin="0.0172 -0.0127 0.007"
         lo="-0.81"/>
-
-    <xacro:gear_link
-        namex="${prefix}driven_gear_link"
-        mesh="package://gripper-rollpawkit/meshes/driven_gear.stl"/>
-    <xacro:gear_joint
-        namex="${prefix}driven_gear_joint"
-        parentx="${prefix}base_link"
-        childx="${prefix}driven_gear_link"
-        origin="0.0172 0.0127 0.007"
-        hi="0.81"
-        mimicx="${prefix}driving_gear_joint"/>
-
-    <xacro:gear_linkage_link
-        namex="driven_linkage_link"
-        mesh="package://gripper-rollpawkit/meshes/driven_linkage.stl"/>    
-    <xacro:gear_linkage_joint
-        namex="driven_linkage_joint"
-        parentx="base_link"
-        childx="driven_linkage_link"
-        origin="0.0356 -0.0054 0.007"
-        mimicx="${prefix}driven_gear_joint"/>
 
     <xacro:gear_linkage_link
         namex="driving_linkage_link"
@@ -148,9 +156,42 @@
         namex="driving_linkage_joint"
         parentx="base_link"
         childx="driving_linkage_link"
-        origin="0.0356 0.0054 0.007"
-        mimicx="${prefix}driving_gear_joint"/>
+        origin="0.0356 -0.0054 0.007"
+        mimicx="driving_gear_joint"/>
+
+    <xacro:finger_link
+        namex="driving_finger_link"
+        mesh="package://gripper-rollpawkit/meshes/linkage.stl"/>    
+    <xacro:finger_joint
+        namex="driving_finger_joint"
+        parentx="driving_gear_link"
+        childx="driving_finger_link"
+        origin="0.0308 0 0"
+        mimicx="driving_gear_joint"/>
     
+    <!-- -->
+
+    <xacro:gear_link
+        namex="driven_gear_link"
+        mesh="package://gripper-rollpawkit/meshes/driven_gear.stl"/>
+    <xacro:gear_joint
+        namex="driven_gear_joint"
+        parentx="base_link"
+        childx="driven_gear_link"
+        origin="0.0172 0.0127 0.007"
+        hi="0.81"
+        mimicx="driving_gear_joint"/>
+
+    <xacro:gear_linkage_link
+        namex="driven_linkage_link"
+        mesh="package://gripper-rollpawkit/meshes/driven_linkage.stl"/>    
+    <xacro:gear_linkage_joint
+        namex="driven_linkage_joint"
+        parentx="base_link"
+        childx="driven_linkage_link"
+        origin="0.0356 0.0054 0.007"
+        mimicx="driven_gear_joint"/>
+
   </xacro:macro>
 
 </robot>
