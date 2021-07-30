@@ -1,5 +1,20 @@
 <?xml version="1.0"?>
 <robot name="gripper-rollpawkit" xmlns:xacro="http://ros.org/wiki/xacro">
+  <material name="blue">
+    <color rgba="0 0 1 1"/>
+  </material>
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+  <material name="green">
+    <color rgba="0 1 0 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
   <xacro:include filename="$(find gripper-rollpawkit)/urdf/gripper-rollpawkit-macro.xacro" />
   <xacro:gripper-rollpawkit prefix=""/>
 </robot>

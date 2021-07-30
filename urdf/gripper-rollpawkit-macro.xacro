@@ -1,20 +1,5 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-  <material name="blue">
-    <color rgba="0 0 1 1"/>
-  </material>
-  <material name="red">
-    <color rgba="1 0 0 1"/>
-  </material>
-  <material name="green">
-    <color rgba="0 1 0 1"/>
-  </material>
-  <material name="black">
-    <color rgba="0 0 0 1"/>
-  </material>
-  <material name="white">
-    <color rgba="1 1 1 1"/>
-  </material>
   <xacro:property name="scale" value="1.0 1.0 1.0"/>
   
   <xacro:macro name="base_link" params="namex">
@@ -139,76 +124,91 @@
   <!-- Initialization of all joints and links -->
   
   <xacro:macro name="gripper-rollpawkit" params="prefix">
-    <xacro:base_link namex="base_link"/>
+    <xacro:property name="base_link" value="${prefix}base_link"/>
+    <xacro:property name="driving_gear_link" value="${prefix}driving_gear_link"/>
+    <xacro:property name="driving_gear_joint" value="${prefix}driving_gear_joint"/>
+    <xacro:property name="driving_linkage_link" value="${prefix}driving_linkage_link"/>
+    <xacro:property name="driving_linkage_joint" value="${prefix}driving_linkage_joint"/>
+    <xacro:property name="driving_linkage_link" value="${prefix}driving_linkage_link"/>
+    <xacro:property name="driving_finger_link" value="${prefix}driving_finger_link"/>
+    <xacro:property name="driving_finger_joint" value="${prefix}driving_finger_joint"/>
+    <xacro:property name="driven_gear_link" value="${prefix}driven_gear_link"/>
+    <xacro:property name="driven_gear_joint" value="${prefix}driven_gear_joint"/>
+    <xacro:property name="driven_linkage_link" value="${prefix}driven_linkage_link"/>
+    <xacro:property name="driven_linkage_joint" value="${prefix}driven_linkage_joint"/>
+    <xacro:property name="driven_finger_link" value="${prefix}driven_finger_link"/>
+    <xacro:property name="driven_finger_joint" value="${prefix}driven_finger_joint"/>
+    
+    <xacro:base_link namex="${base_link}"/>
 
     <xacro:gear_link
-        namex="driving_gear_link"
+        namex="${driving_gear_link}"
         mesh="package://gripper-rollpawkit/meshes/driving_gear.stl"/>
     <xacro:gear_joint
-        namex="driving_gear_joint"
-        parentx="base_link"
-        childx="driving_gear_link"
+        namex="${driving_gear_joint}"
+        parentx="${base_link}"
+        childx="${driving_gear_link}"
         origin="0.0172 -0.0127 0.007"
         lo="-0.81"/>
 
     <xacro:gear_linkage_link
-        namex="driving_linkage_link"
+        namex="${driving_linkage_link}"
         mesh="package://gripper-rollpawkit/meshes/driven_linkage.stl"/>    
     <xacro:gear_linkage_joint
-        namex="driving_linkage_joint"
-        parentx="base_link"
-        childx="driving_linkage_link"
+        namex="${driving_linkage_joint}"
+        parentx="${base_link}"
+        childx="${driving_linkage_link}"
         origin="0.0356 -0.0054 0.007"
-        mimicx="driving_gear_joint"/>
+        mimicx="${driving_gear_joint}"/>
 
     <xacro:finger_link
-        namex="driving_finger_link"
+        namex="${driving_finger_link}"
         rpyx="0 0 0"
         mesh="package://gripper-rollpawkit/meshes/linkage.stl"/>    
     <xacro:finger_joint
-        namex="driving_finger_joint"
-        parentx="driving_gear_link"
-        childx="driving_finger_link"
+        namex="${driving_finger_joint}"
+        parentx="${driving_gear_link}"
+        childx="${driving_finger_link}"
         origin="0.0308 0 0"
         lo="0.81"
         offset="0.42"
-        mimicx="driving_gear_joint"/>
+        mimicx="${driving_gear_joint}"/>
     
     <!-- -->
 
     <xacro:gear_link
-        namex="driven_gear_link"
+        namex="${driven_gear_link}"
         mesh="package://gripper-rollpawkit/meshes/driven_gear.stl"/>
     <xacro:gear_joint
-        namex="driven_gear_joint"
-        parentx="base_link"
-        childx="driven_gear_link"
+        namex="${driven_gear_joint}"
+        parentx="${base_link}"
+        childx="${driven_gear_link}"
         origin="0.0172 0.0127 0.007"
         hi="0.81"
-        mimicx="driving_gear_joint"/>
+        mimicx="${driving_gear_joint}"/>
 
     <xacro:gear_linkage_link
-        namex="driven_linkage_link"
+        namex="${driven_linkage_link}"
         mesh="package://gripper-rollpawkit/meshes/driven_linkage.stl"/>    
     <xacro:gear_linkage_joint
-        namex="driven_linkage_joint"
-        parentx="base_link"
-        childx="driven_linkage_link"
+        namex="${driven_linkage_joint}"
+        parentx="${base_link}"
+        childx="${driven_linkage_link}"
         origin="0.0356 0.0054 0.007"
-        mimicx="driven_gear_joint"/>
+        mimicx="${driven_gear_joint}"/>
 
     <xacro:finger_link
-        namex="driven_finger_link"
+        namex="${driven_finger_link}"
         rpyx="3.14 0 0"
         mesh="package://gripper-rollpawkit/meshes/linkage.stl"/>    
     <xacro:finger_joint
-        namex="driven_finger_joint"
-        parentx="driven_gear_link"
-        childx="driven_finger_link"
+        namex="${driven_finger_joint}"
+        parentx="${driven_gear_link}"
+        childx="${driven_finger_link}"
         origin="0.0308 0 0"
         hi="0.81"
         offset="-0.42"
-        mimicx="driven_gear_joint"/>
+        mimicx="${driven_gear_joint}"/>
 
   </xacro:macro>
 
