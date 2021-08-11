@@ -6,14 +6,17 @@ This is not 1:1 mapping which means some elements of the parts are not present. 
 
 # Hardware
 
-Standard Gripper Kit Paw for Robotic Arm Rollarm DIY Robot
-https://www.sunfounder.com/products/standard-gripper-kit
+[Standard Gripper Kit Paw for Robotic Arm Rollarm DIY Robot](https://www.sunfounder.com/products/standard-gripper-kit)
 
 # Run
 
 ``` bash
 roslaunch gripper-rollpawkit simulate.launch
 ```
+
+# Demonstration video
+
+[![Demo](demo/gripper-in-rviz.png)](demo/gripper-in-rviz.mp4)
 
 # Download
 
