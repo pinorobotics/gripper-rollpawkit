@@ -64,17 +64,37 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_link:
+        gripper:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        driven_gear_link:
+        gripper_driven_finger_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        driving_gear_link:
+        gripper_driven_gear_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_driven_linkage_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_driving_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_driving_gear_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_driving_linkage_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -90,11 +110,19 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        base_link:
+        gripper:
           Value: true
-        driven_gear_link:
+        gripper_driven_finger_link:
           Value: true
-        driving_gear_link:
+        gripper_driven_gear_link:
+          Value: true
+        gripper_driven_linkage_link:
+          Value: true
+        gripper_driving_finger_link:
+          Value: true
+        gripper_driving_gear_link:
+          Value: true
+        gripper_driving_linkage_link:
           Value: true
       Marker Alpha: 1
       Marker Scale: 0.5
@@ -103,10 +131,16 @@ Visualization Manager:
       Show Axes: false
       Show Names: false
       Tree:
-        base_link:
-          driven_gear_link:
+        gripper:
+          gripper_driven_gear_link:
+            gripper_driven_finger_link:
+              {}
+          gripper_driven_linkage_link:
             {}
-          driving_gear_link:
+          gripper_driving_gear_link:
+            gripper_driving_finger_link:
+              {}
+          gripper_driving_linkage_link:
             {}
       Update Interval: 0
       Value: true
@@ -114,7 +148,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: base_link
+    Fixed Frame: gripper
     Frame Rate: 30
   Name: root
   Tools:
@@ -174,5 +208,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1266
-  X: 206
-  Y: 20
+  X: 202
+  Y: -40

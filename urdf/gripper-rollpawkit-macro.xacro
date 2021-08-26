@@ -123,21 +123,21 @@
   
   <!-- Initialization of all joints and links -->
   
-  <xacro:macro name="gripper-rollpawkit" params="prefix">
-    <xacro:property name="base_link" value="${prefix}base_link"/>
-    <xacro:property name="driving_gear_link" value="${prefix}driving_gear_link"/>
-    <xacro:property name="driving_gear_joint" value="${prefix}driving_gear_joint"/>
-    <xacro:property name="driving_linkage_link" value="${prefix}driving_linkage_link"/>
-    <xacro:property name="driving_linkage_joint" value="${prefix}driving_linkage_joint"/>
-    <xacro:property name="driving_linkage_link" value="${prefix}driving_linkage_link"/>
-    <xacro:property name="driving_finger_link" value="${prefix}driving_finger_link"/>
-    <xacro:property name="driving_finger_joint" value="${prefix}driving_finger_joint"/>
-    <xacro:property name="driven_gear_link" value="${prefix}driven_gear_link"/>
-    <xacro:property name="driven_gear_joint" value="${prefix}driven_gear_joint"/>
-    <xacro:property name="driven_linkage_link" value="${prefix}driven_linkage_link"/>
-    <xacro:property name="driven_linkage_joint" value="${prefix}driven_linkage_joint"/>
-    <xacro:property name="driven_finger_link" value="${prefix}driven_finger_link"/>
-    <xacro:property name="driven_finger_joint" value="${prefix}driven_finger_joint"/>
+  <xacro:macro name="gripper-rollpawkit" params="name">
+    <xacro:property name="base_link" value="${name}"/>
+    <xacro:property name="driving_gear_link" value="${name}_driving_gear_link"/>
+    <xacro:property name="driving_gear_joint" value="${name}_driving_gear_joint"/>
+    <xacro:property name="driving_linkage_link" value="${name}_driving_linkage_link"/>
+    <xacro:property name="driving_linkage_joint" value="${name}_driving_linkage_joint"/>
+    <xacro:property name="driving_linkage_link" value="${name}_driving_linkage_link"/>
+    <xacro:property name="driving_finger_link" value="${name}_driving_finger_link"/>
+    <xacro:property name="driving_finger_joint" value="${name}_driving_finger_joint"/>
+    <xacro:property name="driven_gear_link" value="${name}_driven_gear_link"/>
+    <xacro:property name="driven_gear_joint" value="${name}_driven_gear_joint"/>
+    <xacro:property name="driven_linkage_link" value="${name}_driven_linkage_link"/>
+    <xacro:property name="driven_linkage_joint" value="${name}_driven_linkage_joint"/>
+    <xacro:property name="driven_finger_link" value="${name}_driven_finger_link"/>
+    <xacro:property name="driven_finger_joint" value="${name}_driven_finger_joint"/>
     
     <xacro:base_link namex="${base_link}"/>
 

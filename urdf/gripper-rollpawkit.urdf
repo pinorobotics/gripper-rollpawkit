@@ -16,5 +16,5 @@
     <color rgba="1 1 1 1"/>
   </material>
   <xacro:include filename="$(find gripper-rollpawkit)/urdf/gripper-rollpawkit-macro.xacro" />
-  <xacro:gripper-rollpawkit prefix=""/>
+  <xacro:gripper-rollpawkit name="gripper"/>
 </robot>
